@@ -1,15 +1,21 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:timetable_generation_application/constants/app_routes.dart';
 import 'package:timetable_generation_application/constants/route_manager.dart';
 import 'package:timetable_generation_application/firebase_options.dart';
+import 'package:timetable_generation_application/providers/course_provider.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp( MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => CourseProvider(),)
+    ],
+    child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

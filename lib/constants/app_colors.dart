@@ -30,3 +30,4 @@ class AppColors {
   static const Color info = Color(0xFF3B82F6); // Blue for informational messages or icons
   static const Color highlight = Color(0xFF60A5FA); // Lighter blue for minor highlights
 }
+ 

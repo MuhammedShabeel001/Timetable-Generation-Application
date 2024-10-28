@@ -13,7 +13,7 @@ class RouteManager {
       case AppRoutes.home:
         return MaterialPageRoute(builder: (_) => const MainScreen());
       case AppRoutes.courseManagement:
-        return MaterialPageRoute(builder: (_) => const CourceScreen());
+        return MaterialPageRoute(builder: (_) => const CourseScreen());
       case AppRoutes.subjectManagement:
         return MaterialPageRoute(builder: (_) => const SubjectScreen());
       case AppRoutes.staffManagement:
