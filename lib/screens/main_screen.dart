@@ -24,7 +24,7 @@ class _MainScreenState extends State<MainScreen> {
     const CourseScreen(),
     const SubjectScreen(),
     const StaffScreen(),
-    const TimetableScreen()
+     TimetableScreen()
   ];
 
   void _onTapped(int index) {

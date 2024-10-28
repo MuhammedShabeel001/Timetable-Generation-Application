@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:timetable_generation_application/constants/app_routes.dart';
 import 'package:timetable_generation_application/constants/route_manager.dart';
-import 'package:timetable_generation_application/firebase_options.dart';
+import 'package:timetable_generation_application/services/firebase_options.dart';
 import 'package:timetable_generation_application/providers/course_provider.dart';
 
 Future main() async {
