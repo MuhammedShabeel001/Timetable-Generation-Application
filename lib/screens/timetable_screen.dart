@@ -21,7 +21,7 @@ class TimetableScreen extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => TimetableProvider(subjects, '1', 'Weekly Timetable', 'course_001'),
       child: Scaffold(
-        appBar: AppBar(title: Text('Timetable')),
+        appBar: AppBar(title: const Text('Timetable')),
         body: Consumer<TimetableProvider>(
           builder: (context, timetableProvider, _) {
             return Column(
@@ -42,7 +42,7 @@ class TimetableScreen extends StatelessWidget {
                           _showEditDialog(context, dayIndex, periodIndex);
                         },
                         child: Container(
-                          margin: EdgeInsets.all(4),
+                          margin: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey),
                             borderRadius: BorderRadius.circular(8),
@@ -67,13 +67,13 @@ class TimetableScreen extends StatelessWidget {
                       onPressed: () {
                         timetableProvider.generateTimetable(subjects);
                       },
-                      child: Text('Generate Timetable'),
+                      child: const Text('Generate Timetable'),
                     ),
                     ElevatedButton(
                       onPressed: () {
                         // Save functionality can be implemented here
                       },
-                      child: Text('Save Timetable'),
+                      child: const Text('Save Timetable'),
                     ),
                   ],
                 ),
@@ -94,17 +94,17 @@ class TimetableScreen extends StatelessWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Edit Timetable Cell'),
+          title: const Text('Edit Timetable Cell'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: subjectController,
-                decoration: InputDecoration(labelText: 'Subject'),
+                decoration: const InputDecoration(labelText: 'Subject'),
               ),
               TextField(
                 controller: staffController,
-                decoration: InputDecoration(labelText: 'Staff'),
+                decoration: const InputDecoration(labelText: 'Staff'),
               ),
             ],
           ),
@@ -116,7 +116,7 @@ class TimetableScreen extends StatelessWidget {
                 timetableProvider.updateCell(dayIndex, periodIndex, subject, staff);
                 Navigator.pop(context);
               },
-              child: Text('Update'),
+              child: const Text('Update'),
             ),
           ],
         );

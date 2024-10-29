@@ -5,7 +5,6 @@ import 'package:timetable_generation_application/constants/app_routes.dart';
 import 'package:timetable_generation_application/constants/route_manager.dart';
 import 'package:timetable_generation_application/providers/staff_provider.dart';
 import 'package:timetable_generation_application/providers/subject_provider.dart';
-import 'package:timetable_generation_application/providers/timetable_provider.dart';
 import 'package:timetable_generation_application/services/firebase_options.dart';
 import 'package:timetable_generation_application/providers/course_provider.dart';
 
@@ -21,7 +20,7 @@ Future main() async {
       ChangeNotifierProvider(create: (context) => StaffProvider()),
       // ChangeNotifierProvider(create: (context) => TimetableProvider(subjects, id, name, courseId)),
     ],
-    child: MyApp()));
+    child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
