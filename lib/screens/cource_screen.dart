@@ -5,23 +5,22 @@ import 'package:timetable_generation_application/widgets/course_fab.dart';
 import '../models/course_model.dart';
 import '../providers/course_provider.dart';
 import '../widgets/custom_appbar.dart';
-import '../widgets/transition_card.dart';
+import '../widgets/Course_card.dart';
 
 class CourseScreen extends StatelessWidget {
   const CourseScreen({super.key});
 
   @override
-Widget build(BuildContext context) {
-  final courseProvider = Provider.of<CourseProvider>(context);
+  Widget build(BuildContext context) {
+    final courseProvider = Provider.of<CourseProvider>(context);
 
-  return Scaffold(
-    appBar: const PreferredSize(
-      preferredSize: Size.fromHeight(180),
-      child: SappBar(height: 200, title: AppTexts.courseScreenTitle),
-    ),
-    floatingActionButton: const CourseFAB(),
-    body: 
-    FutureBuilder<void>(
+    return Scaffold(
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(180),
+        child: SappBar(height: 200, title: AppTexts.courseScreenTitle),
+      ),
+      floatingActionButton: const CourseFAB(),
+      body: FutureBuilder<void>(
         future: courseProvider.fetchCourses(), // Adjust the Future type here
         builder: (context, snapshot) {
           if (courseProvider.isLoading) {
@@ -42,6 +41,5 @@ Widget build(BuildContext context) {
         },
       ),
     );
-  
-}
+  }
 }

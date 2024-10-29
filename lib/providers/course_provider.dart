@@ -82,6 +82,16 @@ class CourseProvider with ChangeNotifier {
     }
   }
 
+void updateCourse(String courseId, String newName, String newDescription) {
+    firestore.collection('courses').doc(courseId).update({
+      'name': newName,
+      'description': newDescription,
+    }).then((_) {
+      notifyListeners(); // Notify listeners to update the UI
+    }).catchError((error) {
+      print("Error updating course: $error");
+    });
+  }
   // Fetch course suggestions based on the input pattern
   Future<List<Map<String, String>>> getCourseSuggestions(String query) async {
     try {
@@ -118,6 +128,16 @@ class CourseProvider with ChangeNotifier {
       notifyListeners();
     }
   }
+
+String getCourseNameById(String courseId) {
+  // Assuming _courses is a List<Course> containing your courses
+  final course = _courses.firstWhere(
+    (course) => course.id == courseId,
+    orElse: () => Course(id: 'unknown', name: 'Unknown Course', subjectIds: [], description: 'No description available.'),
+  );
+  return course.name; // This will never be null because of the orElse condition
+}
+  
 
   void clearControllers() {
     courseNameController.clear();
