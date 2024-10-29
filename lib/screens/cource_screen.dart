@@ -1,10 +1,13 @@
 // screens/course_screen.dart
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:timetable_generation_application/constants/app_colors.dart';
 import 'package:timetable_generation_application/constants/app_texts.dart';
-import 'package:timetable_generation_application/widgets/custom_bottomsheet.dart';
+import 'package:timetable_generation_application/widgets/custom_popup.dart';
+import '../constants/contants.dart';
 import '../providers/course_provider.dart';
 import '../widgets/custom_appbar.dart';
 
@@ -21,14 +24,40 @@ class CourseScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primary,
         onPressed: () {
-          showModalBottomSheet(
+          showDialog(
+            barrierDismissible: false,
             context: context,
-            isScrollControlled: true,
-            builder: (context) {
-              return CustomBottomsheet(
-                onClose: () => Navigator.pop(context), // Close the bottom sheet
-              );
-            },
+            builder: (_) => CustomPopup(
+              title: 'Add Course',
+              fields: [
+                TextField(
+                  controller: courseNameController,
+                  decoration: const InputDecoration(
+                    labelText: 'Course Name',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: descriptionController,
+                  decoration: const InputDecoration(
+                    labelText: 'Description',
+                    border: OutlineInputBorder(),
+                  ),
+                  maxLines: 3,
+                ),
+              ],
+              onSave: () {
+                if (courseNameController.text.isNotEmpty &&
+                    descriptionController.text.isNotEmpty) {
+                  Provider.of<CourseProvider>(context, listen: false)
+                      .addCourse();
+                  log(courseNameController.text);
+                }
+                Navigator.of(context).pop();
+              },
+              onClose: () => Navigator.of(context).pop(),
+            ),
           );
         },
         child: const FaIcon(
