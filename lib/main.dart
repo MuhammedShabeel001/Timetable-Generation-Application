@@ -5,22 +5,28 @@ import 'package:timetable_generation_application/constants/app_routes.dart';
 import 'package:timetable_generation_application/constants/route_manager.dart';
 import 'package:timetable_generation_application/providers/staff_provider.dart';
 import 'package:timetable_generation_application/providers/subject_provider.dart';
+import 'package:timetable_generation_application/providers/timetable_provider.dart';
 import 'package:timetable_generation_application/services/firebase_options.dart';
 import 'package:timetable_generation_application/providers/course_provider.dart';
 
-Future main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp( MultiProvider(
+
+  // Create a dummy TimetableProvider with placeholder values
+  // final timetableProvider = TimetableProvider('1', 'Weekly Timetable', 'course_001');
+
+  runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => CourseProvider()),
       ChangeNotifierProvider(create: (context) => SubjectProvider()),
       ChangeNotifierProvider(create: (context) => StaffProvider()),
-      // ChangeNotifierProvider(create: (context) => TimetableProvider(subjects, id, name, courseId)),
+      ChangeNotifierProvider(create: (context) => TimetableProvider()),
     ],
-    child: const MyApp()));
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
