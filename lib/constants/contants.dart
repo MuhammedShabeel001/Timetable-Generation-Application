@@ -7,3 +7,5 @@ final TextEditingController courseNameController = TextEditingController();
 final TextEditingController descriptionController = TextEditingController();
 final TextEditingController subjectNameController = TextEditingController();
 final TextEditingController courseIdController = TextEditingController();
+final TextEditingController staffNameController = TextEditingController();
+final TextEditingController subjectIdController = TextEditingController();

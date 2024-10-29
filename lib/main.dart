@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:timetable_generation_application/constants/app_routes.dart';
 import 'package:timetable_generation_application/constants/route_manager.dart';
+import 'package:timetable_generation_application/providers/staff_provider.dart';
 import 'package:timetable_generation_application/providers/subject_provider.dart';
 import 'package:timetable_generation_application/providers/timetable_provider.dart';
 import 'package:timetable_generation_application/services/firebase_options.dart';
@@ -17,6 +18,7 @@ Future main() async {
     providers: [
       ChangeNotifierProvider(create: (context) => CourseProvider()),
       ChangeNotifierProvider(create: (context) => SubjectProvider()),
+      ChangeNotifierProvider(create: (context) => StaffProvider()),
       // ChangeNotifierProvider(create: (context) => TimetableProvider(subjects, id, name, courseId)),
     ],
     child: MyApp()));

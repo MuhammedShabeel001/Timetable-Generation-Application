@@ -31,6 +31,29 @@ class SubjectProvider with ChangeNotifier {
     });
   }
 
+  Future<List<Map<String, String>>> getSubjectSuggestions(String query) async {
+  try {
+    QuerySnapshot snapshot = await firestore
+        .collection('subjects')
+        .where('name', isGreaterThanOrEqualTo: query)
+        .where('name', isLessThanOrEqualTo: '$query\uf8ff')
+        .get();
+
+    // Extract course IDs and names from the fetched documents
+    List<Map<String, String>> courseData = snapshot.docs.map((doc) {
+      return {
+        'id': doc.id,
+        'name': doc['name'] as String,
+      };
+    }).toList();
+
+    return courseData;
+  } catch (e) {
+    print("Error fetching subject suggestions: $e");
+    return [];
+  }
+}
+
   /// Clears the input controllers after use.
   void clearControllers() {
     subjectNameController.clear();
