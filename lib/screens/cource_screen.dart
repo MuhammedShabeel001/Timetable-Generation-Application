@@ -6,6 +6,7 @@ import '../models/course_model.dart';
 import '../providers/course_provider.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/Course_card.dart';
+import '../widgets/shimmer_loading.dart';
 
 class CourseScreen extends StatelessWidget {
   const CourseScreen({super.key});
@@ -20,22 +21,20 @@ class CourseScreen extends StatelessWidget {
         child: SappBar(height: 200, title: AppTexts.courseScreenTitle),
       ),
       floatingActionButton: const CourseFAB(),
-      body: FutureBuilder<void>(
-        future: courseProvider.fetchCourses(), // Adjust the Future type here
-        builder: (context, snapshot) {
-          if (courseProvider.isLoading) {
-            // return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (courseProvider.courses.isEmpty) {
+      body: Consumer<CourseProvider>(
+        builder: (context, provider, _) {
+          if (provider.isLoading) {
+            return CourseShimmer();
+          } else if (provider.errorMessage != null) {
+            return Center(child: Text('Error: ${provider.errorMessage}'));
+          } else if (provider.courses.isEmpty) {
             return const Center(child: Text('No courses available'));
           }
 
-          final courses = courseProvider.courses;
           return ListView.builder(
-            itemCount: courses.length,
+            itemCount: provider.courses.length,
             itemBuilder: (context, index) {
-              return CourseCard(course: courses[index]);
+              return CourseCard(course: provider.courses[index]);
             },
           );
         },
