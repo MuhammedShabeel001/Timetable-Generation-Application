@@ -1,27 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:timetable_generation_application/constants/app_colors.dart';
 
 class CourseShimmer extends StatelessWidget {
+  const CourseShimmer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 5, // Show 5 shimmer placeholders
+      itemCount: 10, // Show 5 shimmer placeholders
       itemBuilder: (context, index) {
         return Shimmer.fromColors(
-          baseColor: Colors.grey[300]!,
-          highlightColor: Colors.grey[100]!,
+          baseColor: AppColors.textThird,
+          highlightColor: AppColors.textLight,
           child: Card(
             margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: ListTile(
               title: Container(
                 height: 20,
                 width: double.infinity,
-                color: Colors.white,
+                color: AppColors.background,
               ),
               subtitle: Container(
                 height: 14,
                 width: double.infinity,
-                color: Colors.white,
+                color: AppColors.background,
               ),
             ),
           ),

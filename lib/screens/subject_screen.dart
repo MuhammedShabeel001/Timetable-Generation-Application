@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:timetable_generation_application/models/subject_model.dart';
-import 'package:timetable_generation_application/providers/subject_provider.dart';
-import 'package:timetable_generation_application/widgets/Subject_card.dart';
+import 'package:timetable_generation_application/widgets/subject_card.dart';
 import 'package:timetable_generation_application/widgets/shimmer_loading.dart';
 import 'package:timetable_generation_application/widgets/subject_fab.dart';
 import '../constants/app_texts.dart';
@@ -14,22 +12,20 @@ class SubjectScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final subjectProvider = Provider.of<SubjectProvider>(context);
-
-    return  Scaffold(
-      appBar: PreferredSize(
+    return Scaffold(
+      appBar: const PreferredSize(
         preferredSize: Size.fromHeight(180),
         child: SappBar(height: 200, title: AppTexts.subjectScreenTitle),
       ),
-      floatingActionButton: SubjectFAB(),
+      floatingActionButton: const SubjectFAB(),
       body: Consumer<SubjectProvider>(
         builder: (context, provider, _) {
           if (provider.isLoading) {
-            return CourseShimmer();
+            return const CourseShimmer();
           } else if (provider.errorMessage != null) {
-            return Center(child: Text('Error: ${provider.errorMessage}'));
+            return const Center(child: Text(AppTexts.error));
           } else if (provider.subjects.isEmpty) {
-            return const Center(child: Text('No subject available'));
+            return const Center(child: Text(AppTexts.noSubjectsAvailable));
           }
 
           return ListView.builder(

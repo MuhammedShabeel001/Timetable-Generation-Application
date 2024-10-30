@@ -1,10 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-// models/course.dart
 class Course {
   String id;
   String name;
   String description;
-  List<String> subjectIds; // List of subject IDs associated with the course
+  List<String> subjectIds;
 
   Course({
     required this.id,
@@ -25,7 +23,7 @@ class Course {
   Map<String, dynamic> toMap() {
     return {
       'name': name,
-      'description' : description,
+      'description': description,
       'subjectIds': subjectIds,
     };
   }

@@ -31,7 +31,7 @@ class SappBar extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                color: Colors.white,
+                color: AppColors.textLight,
                 fontWeight: FontWeight.bold,
                 fontSize: 40,
               ),

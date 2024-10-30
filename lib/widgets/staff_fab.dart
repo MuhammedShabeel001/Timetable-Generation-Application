@@ -1,143 +1,10 @@
-// import 'dart:developer';
-// import 'package:flutter/material.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:provider/provider.dart';
-// import '../constants/app_colors.dart';
-// import '../constants/contants.dart';
-// import '../providers/staff_provider.dart';
-// import '../providers/subject_provider.dart';
-// import '../widgets/custom_popup.dart';
-
-// class StaffFAB extends StatelessWidget {
-//   const StaffFAB({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return FloatingActionButton(
-//         backgroundColor: AppColors.primary,
-//         onPressed: () {
-//           // Fetch course suggestions and display them in the dialog
-//           showDialog(
-//             context: context,
-//             barrierDismissible: false,
-//             builder: (_) {
-//               List<String> selectedSubjectIds = [];
-
-//               return CustomPopup(
-//                 title: 'Add Staff',
-//                 fields: [
-//                   TextField(
-//                     controller: staffNameController,
-//                     decoration: const InputDecoration(
-//                       labelText: 'Staff Name',
-//                       border: OutlineInputBorder(),
-//                     ),
-//                   ),
-//                   const SizedBox(height: 16),
-//                   FutureBuilder<List<Map<String, String>>>(
-//                     future: Provider.of<SubjectProvider>(context, listen: false)
-//                         .getSubjectSuggestions(''), // Fetch all subjects
-//                     builder: (context, snapshot) {
-//                       // Handle loading state in the dropdown
-//                       if (snapshot.connectionState == ConnectionState.waiting) {
-//                         return DropdownButtonFormField<String>(
-//                         decoration: const InputDecoration(
-//                           labelText: 'Select Subject',
-//                           border: OutlineInputBorder(),
-//                         ),
-//                         value: null,
-//                         items: const [],
-//                         hint: const Text('Loading...'),
-//                         onChanged: null, // Disable onChanged while loading
-//                       ); // Show loading indicator
-//                       } else if (snapshot.hasError) {
-//                         return DropdownButtonFormField<String>(
-//                         decoration: const InputDecoration(
-//                           labelText: 'Select Subject',
-//                           border: OutlineInputBorder(),
-//                         ),
-//                         value: null,
-//                         items: const [],
-//                         hint: const Text('Something went wrong'),
-//                         onChanged: null, // Disable onChanged on error
-//                       );
-//                       } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-//                         return DropdownButtonFormField<String>(
-//                         decoration: const InputDecoration(
-//                           labelText: 'Select Subject',
-//                           border: OutlineInputBorder(),
-//                         ),
-//                         value: null,
-//                         items: const [],
-//                         hint: const Text('No subjects available'),
-//                         onChanged: null, // Disable onChanged if no courses
-//                       );
-//                       }
-
-//                       final subjects = snapshot.data!;
-
-//                       return DropdownButtonFormField<String>(
-//                         decoration: const InputDecoration(
-//                           labelText: 'Select Subjects',
-//                           border: OutlineInputBorder(),
-//                         ),
-//                         isExpanded: true,
-//                         items: subjects.take(5).map((Map<String, String> subject) {
-//                           return DropdownMenuItem<String>(
-//                             value: subject['id'], // Use subject ID as the value
-//                             child: Text(subject['name'] ?? ''),
-//                           );
-//                         }).toList(),
-//                         onChanged: (String? newValue) {
-//                           if (newValue != null) {
-//                             if (!selectedSubjectIds.contains(newValue)) {
-//                               selectedSubjectIds.add(newValue); // Add selected subject ID
-//                             } else {
-//                               selectedSubjectIds.remove(newValue); // Remove if already selected
-//                             }
-//                           }
-//                         },
-//                         hint: const Text('Select Subjects'),
-//                       );
-//                     },
-//                   ),
-//                 ],
-//                 onSave: () {
-//                   if (staffNameController.text.isNotEmpty && selectedSubjectIds.isNotEmpty) {
-//                     Provider.of<StaffProvider>(context, listen: false)
-//                         .addStaff(selectedSubjectIds); // Pass the selected subject IDs
-//                     log(staffNameController.text);
-//                   }
-//                   Navigator.of(context).pop();
-//                 },
-//                 onClose: () => Navigator.of(context).pop(),
-//               );
-//             },
-//           );
-//         },
-//         child: const FaIcon(
-//           FontAwesomeIcons.plus,
-//           color: Colors.white,
-//         ),
-//       );
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart'; // Import the multi_select_flutter package
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:timetable_generation_application/constants/app_texts.dart';
+import 'package:timetable_generation_application/widgets/custom_snackbar.dart';
 import '../constants/app_colors.dart';
 import '../providers/staff_provider.dart';
 import '../providers/subject_provider.dart';
@@ -148,7 +15,6 @@ class StaffFAB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Controller for the staff name
     final TextEditingController staffNameController = TextEditingController();
 
     return FloatingActionButton(
@@ -161,27 +27,26 @@ class StaffFAB extends StatelessWidget {
             List<String> selectedSubjectIds = [];
 
             return CustomPopup(
-              title: 'Add Staff',
+              title: AppTexts.addStaff,
               fields: [
                 TextField(
                   controller: staffNameController,
                   decoration: const InputDecoration(
-                    labelText: 'Staff Name',
+                    labelText: AppTexts.staffName,
                     border: OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 16),
                 FutureBuilder<List<Map<String, String>>>(
                   future: Provider.of<SubjectProvider>(context, listen: false)
-                      .getSubjectSuggestions(''), // Fetch all subjects
+                      .getSubjectSuggestions(''),
                   builder: (context, snapshot) {
-                    // Handle loading state in the dropdown
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator(); // Show loading indicator
+                      return const CircularProgressIndicator();
                     } else if (snapshot.hasError) {
-                      return const Text('Something went wrong');
+                      return const Text(AppTexts.error);
                     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return const Text('No subjects available');
+                      return const Text(AppTexts.noStaffAvailable);
                     }
 
                     final subjects = snapshot.data!;
@@ -194,8 +59,8 @@ class StaffFAB extends StatelessWidget {
 
                     return MultiSelectDialogField(
                       items: subjectItems,
-                      title: const Text('Select Subjects'),
-                      buttonText: const Text('Select Subjects'),
+                      title: const Text(AppTexts.selectSubject),
+                      buttonText: const Text(AppTexts.selectSubject),
                       onConfirm: (values) {
                         selectedSubjectIds = List<String>.from(values);
                       },
@@ -204,12 +69,18 @@ class StaffFAB extends StatelessWidget {
                 ),
               ],
               onSave: () {
-                if (staffNameController.text.isNotEmpty && selectedSubjectIds.isNotEmpty) {
+                if (staffNameController.text.isNotEmpty &&
+                    selectedSubjectIds.isNotEmpty) {
                   Provider.of<StaffProvider>(context, listen: false)
-                      .addStaff(staffNameController.text, selectedSubjectIds); // Pass the selected subject IDs
+                      .addStaff(staffNameController.text, selectedSubjectIds);
                   log(staffNameController.text);
                 }
                 Navigator.of(context).pop();
+                CustomSnackBar.show(
+                  context: context,
+                  message: 'New staff added',
+                  backgroundColor: AppColors.success,
+                );
               },
               onClose: () => Navigator.of(context).pop(),
             );
@@ -218,7 +89,7 @@ class StaffFAB extends StatelessWidget {
       },
       child: const FaIcon(
         FontAwesomeIcons.plus,
-        color: Colors.white,
+        color: AppColors.cardBackground,
       ),
     );
   }

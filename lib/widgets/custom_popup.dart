@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:timetable_generation_application/constants/app_texts.dart';
 // import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class CustomPopup extends StatelessWidget {
@@ -8,17 +9,16 @@ class CustomPopup extends StatelessWidget {
   final Function() onClose;
 
   const CustomPopup({
-    Key? key,
+    super.key,
     required this.title,
     required this.fields,
     required this.onSave,
     required this.onClose,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
       ),
@@ -32,7 +32,8 @@ class CustomPopup extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
               ...fields,
@@ -42,11 +43,11 @@ class CustomPopup extends StatelessWidget {
                 children: [
                   TextButton(
                     onPressed: onClose,
-                    child: const Text('CANCEL'),
+                    child: const Text(AppTexts.cancel),
                   ),
                   ElevatedButton(
                     onPressed: onSave,
-                    child: const Text('SAVE'),
+                    child: const Text(AppTexts.save),
                   ),
                 ],
               ),

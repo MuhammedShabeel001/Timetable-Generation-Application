@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -24,7 +22,7 @@ class _MainScreenState extends State<MainScreen> {
     const CourseScreen(),
     const SubjectScreen(),
     const StaffScreen(),
-     TimetableScreen()
+    const TimetableScreen()
   ];
 
   void _onTapped(int index) {
@@ -60,10 +58,8 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: FlashyTabBar(
         items: [
           FlashyTabBarItem(
-            icon: const FaIcon(
-              FontAwesomeIcons.graduationCap, // Course icon
-              color: AppColors.primary
-            ),
+            icon: const FaIcon(FontAwesomeIcons.graduationCap,
+                color: AppColors.primary),
             title: const Text(
               'Course',
               style: TextStyle(color: AppColors.primaryDark),
@@ -71,7 +67,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
           FlashyTabBarItem(
             icon: const FaIcon(
-              FontAwesomeIcons.book, // Subject icon
+              FontAwesomeIcons.book,
               color: AppColors.primary,
             ),
             title: const Text(
@@ -81,7 +77,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
           FlashyTabBarItem(
             icon: const FaIcon(
-              FontAwesomeIcons.chalkboardTeacher, // Staff icon
+              FontAwesomeIcons.chalkboardTeacher,
               color: AppColors.primary,
             ),
             title: const Text(
@@ -91,7 +87,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
           FlashyTabBarItem(
             icon: const FaIcon(
-              FontAwesomeIcons.calendarAlt, // Timetable icon
+              FontAwesomeIcons.calendarAlt,
               color: AppColors.primary,
             ),
             title: const Text(

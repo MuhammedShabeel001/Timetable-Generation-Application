@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:timetable_generation_application/constants/app_texts.dart';
 import 'package:timetable_generation_application/widgets/course_fab.dart';
-import '../models/course_model.dart';
 import '../providers/course_provider.dart';
 import '../widgets/custom_appbar.dart';
-import '../widgets/Course_card.dart';
+import '../widgets/course_card.dart';
 import '../widgets/shimmer_loading.dart';
 
 class CourseScreen extends StatelessWidget {
@@ -13,8 +12,6 @@ class CourseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final courseProvider = Provider.of<CourseProvider>(context);
-
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(180),
@@ -24,11 +21,11 @@ class CourseScreen extends StatelessWidget {
       body: Consumer<CourseProvider>(
         builder: (context, provider, _) {
           if (provider.isLoading) {
-            return CourseShimmer();
+            return const CourseShimmer();
           } else if (provider.errorMessage != null) {
-            return Center(child: Text('Error: ${provider.errorMessage}'));
+            return const Center(child: Text(AppTexts.error));
           } else if (provider.courses.isEmpty) {
-            return const Center(child: Text('No courses available'));
+            return const Center(child: Text(AppTexts.noCoursesAvailable));
           }
 
           return ListView.builder(

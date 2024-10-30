@@ -2,11 +2,13 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:timetable_generation_application/constants/app_texts.dart';
 import '../constants/app_colors.dart';
 import '../constants/contants.dart';
 import '../providers/course_provider.dart';
 import '../providers/subject_provider.dart';
 import '../widgets/custom_popup.dart';
+import 'custom_snackbar.dart';
 
 class SubjectFAB extends StatelessWidget {
   const SubjectFAB({super.key});
@@ -26,12 +28,12 @@ class SubjectFAB extends StatelessWidget {
             String? selectedCourseName;
 
             return CustomPopup(
-              title: 'Add Subject',
+              title: AppTexts.addSubject,
               fields: [
                 TextField(
                   controller: subjectNameController,
                   decoration: const InputDecoration(
-                    labelText: 'Subject Name',
+                    labelText: AppTexts.subjectName,
                     border: OutlineInputBorder(),
                   ),
                 ),
@@ -44,34 +46,34 @@ class SubjectFAB extends StatelessWidget {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return DropdownButtonFormField<String>(
                         decoration: const InputDecoration(
-                          labelText: 'Select Course',
+                          labelText: AppTexts.selectCourse,
                           border: OutlineInputBorder(),
                         ),
                         value: null,
                         items: const [],
-                        hint: const Text('Loading...'),
+                        hint: const Text(AppTexts.loading),
                         onChanged: null, // Disable onChanged while loading
                       );
                     } else if (snapshot.hasError) {
                       return DropdownButtonFormField<String>(
                         decoration: const InputDecoration(
-                          labelText: 'Select Course',
+                          labelText: AppTexts.selectCourse,
                           border: OutlineInputBorder(),
                         ),
                         value: null,
                         items: const [],
-                        hint: const Text('Something went wrong'),
+                        hint: const Text(AppTexts.errorOccurred),
                         onChanged: null, // Disable onChanged on error
                       );
                     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                       return DropdownButtonFormField<String>(
                         decoration: const InputDecoration(
-                          labelText: 'Select Course',
+                          labelText: AppTexts.selectCourse,
                           border: OutlineInputBorder(),
                         ),
                         value: null,
                         items: const [],
-                        hint: const Text('No courses available'),
+                        hint: const Text(AppTexts.noCoursesAvailable),
                         onChanged: null, // Disable onChanged if no courses
                       );
                     }
@@ -80,7 +82,7 @@ class SubjectFAB extends StatelessWidget {
 
                     return DropdownButtonFormField<String>(
                       decoration: const InputDecoration(
-                        labelText: 'Select Course',
+                        labelText: AppTexts.selectCourse,
                         border: OutlineInputBorder(),
                       ),
                       value: selectedCourseName,
@@ -109,6 +111,11 @@ class SubjectFAB extends StatelessWidget {
                   log(subjectNameController.text);
                 }
                 Navigator.of(context).pop();
+                CustomSnackBar.show(
+                  context: context,
+                  message: 'New Subject Added',
+                  backgroundColor: AppColors.success // Optional custom background color
+                );
               },
               onClose: () => Navigator.of(context).pop(),
             );
@@ -117,7 +124,7 @@ class SubjectFAB extends StatelessWidget {
       },
       child: const FaIcon(
         FontAwesomeIcons.plus,
-        color: Colors.white,
+        color: AppColors.cardBackground,
       ),
     );
   }

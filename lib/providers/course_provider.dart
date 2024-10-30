@@ -1,3 +1,4 @@
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class CourseProvider with ChangeNotifier {
       await fetchCourses();
       clearControllers();
     } catch (e) {
-      print("Error adding course: $e");
+      log("Error adding course: $e");
       _errorMessage = "Failed to add course.";
     }
     notifyListeners();
@@ -67,7 +68,7 @@ class CourseProvider with ChangeNotifier {
       });
       await fetchCourses();
     } catch (e) {
-      print("Error updating course: $e");
+      log("Error updating course: $e");
       _errorMessage = "Failed to update course.";
     }
     notifyListeners();
@@ -78,7 +79,7 @@ class CourseProvider with ChangeNotifier {
       await firestore.collection('courses').doc(courseId).delete();
       await fetchCourses();
     } catch (e) {
-      print("Error removing course: $e");
+      log("Error removing course: $e");
       _errorMessage = "Failed to remove course.";
     }
     notifyListeners();
@@ -113,7 +114,7 @@ class CourseProvider with ChangeNotifier {
 
       return courseData;
     } catch (e) {
-      print("Error fetching course suggestions: $e");
+      log("Error fetching course suggestions: $e");
       return [];
     }
   }

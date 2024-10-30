@@ -1,5 +1,8 @@
+
 import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class TimetableGenerator {
   final Random _random = Random();
@@ -22,7 +25,7 @@ class TimetableGenerator {
     }
 
     // Log the generated timetable for debugging
-    print("Generated Timetable: $timetable");
+   debugPrint("Generated Timetable: $timetable");
     
     return timetable;
   }
@@ -37,7 +40,7 @@ class TimetableGenerator {
     final staffList = snapshot.docs.map((doc) => {'id': doc.id, 'name': doc['name']}).toList();
 
     // Debugging log to check if staff are being fetched correctly
-    print('Fetched staff for subject ID $subjectId: $staffList');
+    debugPrint('Fetched staff for subject ID $subjectId: $staffList');
 
     return staffList;
   }

@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:timetable_generation_application/constants/app_routes.dart';
+import 'package:timetable_generation_application/constants/app_texts.dart';
 import 'package:timetable_generation_application/constants/route_manager.dart';
 import 'package:timetable_generation_application/providers/staff_provider.dart';
 import 'package:timetable_generation_application/providers/subject_provider.dart';
@@ -14,9 +15,6 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  // Create a dummy TimetableProvider with placeholder values
-  // final timetableProvider = TimetableProvider('1', 'Weekly Timetable', 'course_001');
 
   runApp(MultiProvider(
     providers: [
@@ -35,7 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'Timetable Generator',
+      title: AppTexts.appName,
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.home,

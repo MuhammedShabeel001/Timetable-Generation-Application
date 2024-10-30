@@ -13,23 +13,20 @@ class StaffScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final staffProvider = Provider.of<StaffProvider>(context);
-
-    return  Scaffold(
-      appBar: PreferredSize(
+    return Scaffold(
+      appBar: const PreferredSize(
         preferredSize: Size.fromHeight(180),
         child: SappBar(height: 200, title: AppTexts.staffScreenTitle),
       ),
-      floatingActionButton: StaffFAB(),
+      floatingActionButton: const StaffFAB(),
       body: Consumer<StaffProvider>(
         builder: (context, provider, _) {
           if (provider.isLoading) {
-            return CourseShimmer();
+            return const CourseShimmer();
           } else if (provider.errorMessage != null) {
-            return Center(child: Text('Error: ${provider.errorMessage}'));
+            return const Center(child: Text(AppTexts.error));
           } else if (provider.staff.isEmpty) {
-            return const Center(child: Text('No subject available'));
+            return const Center(child: Text(AppTexts.noStaffAvailable));
           }
 
           return ListView.builder(
