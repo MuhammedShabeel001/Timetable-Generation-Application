@@ -3,6 +3,7 @@
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:timetable_generation_application/constants/app_colors.dart';
 import 'package:timetable_generation_application/screens/cource_screen.dart';
 import 'package:timetable_generation_application/screens/staff_screen.dart';
 import 'package:timetable_generation_application/screens/subject_screen.dart';
@@ -20,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   final PageController _pageController = PageController();
 
   final List<Widget> _screens = [
-    const CourceScreen(),
+    const CourseScreen(),
     const SubjectScreen(),
     const StaffScreen(),
     const TimetableScreen()
@@ -59,43 +60,41 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: FlashyTabBar(
         items: [
           FlashyTabBarItem(
-            icon: const FaIcon(
-              FontAwesomeIcons.graduationCap, // Course icon
-              color: Colors.black,
-            ),
+            icon: const FaIcon(FontAwesomeIcons.graduationCap,
+                color: AppColors.primary),
             title: const Text(
               'Course',
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: AppColors.primaryDark),
             ),
           ),
           FlashyTabBarItem(
             icon: const FaIcon(
-              FontAwesomeIcons.book, // Subject icon
-              color: Colors.black,
+              FontAwesomeIcons.book,
+              color: AppColors.primary,
             ),
             title: const Text(
               'Subject',
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: AppColors.primaryDark),
             ),
           ),
           FlashyTabBarItem(
             icon: const FaIcon(
-              FontAwesomeIcons.chalkboardTeacher, // Staff icon
-              color: Colors.black,
+              FontAwesomeIcons.chalkboardTeacher,
+              color: AppColors.primary,
             ),
             title: const Text(
               'Staff',
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: AppColors.primaryDark),
             ),
           ),
           FlashyTabBarItem(
             icon: const FaIcon(
-              FontAwesomeIcons.calendarAlt, // Timetable icon
-              color: Colors.black,
+              FontAwesomeIcons.calendarAlt,
+              color: AppColors.primary,
             ),
             title: const Text(
               'Timetable',
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: AppColors.primaryDark),
             ),
           ),
         ],

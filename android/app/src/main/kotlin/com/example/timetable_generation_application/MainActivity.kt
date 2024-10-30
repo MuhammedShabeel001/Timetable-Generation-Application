@@ -1,4 +1,4 @@
-package com.example.timetable_generation_application
+package com.shabeel.timetable
 
 import io.flutter.embedding.android.FlutterActivity
 

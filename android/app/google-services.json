@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "29246826903",
+    "project_id": "timetable-generation-app-57970",
+    "storage_bucket": "timetable-generation-app-57970.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29246826903:android:8b99130d4cada739b23cd2",
+        "android_client_info": {
+          "package_name": "com.shabeel.timetable"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL5t1YqEZi3D-4swqmLM9P2RPhEDV64VM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
