@@ -20,6 +20,7 @@ class TimetableProvider with ChangeNotifier {
     _timetable = await generator.generateTimetable();
 
     _loading = false;
+    // ignore: use_build_context_synchronously
     CustomSnackBar.show(context: context, message: AppTexts.successGeneration,backgroundColor: AppColors.success); // Set loading to false
     notifyListeners(); // Notify listeners again to update the UI
   }

@@ -22,6 +22,7 @@ class AppTexts {
   static const String editSubject = 'Edit Subject';
   static const String subjectName = 'Subject Name';
   static const String selectCourse = 'Select Course';
+  static const String editCourse = 'Edit Course';
   static const String selectSubject = 'Select Subjects';
   static const String noSubjectsAvailable = 'No subjects available. Please add a subject.';
 

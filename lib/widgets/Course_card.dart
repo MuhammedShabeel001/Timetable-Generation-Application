@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:timetable_generation_application/constants/app_colors.dart';
 import 'package:timetable_generation_application/constants/app_texts.dart';
